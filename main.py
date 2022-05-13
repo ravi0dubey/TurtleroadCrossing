@@ -31,7 +31,7 @@ while game_continues:
         # game_continues = False
     for cars in car.all_cars:
         if cars.distance(turtle1)< 20:
-            print("Game Over")
+            score.game_over()
             game_continues = False
 
     if turtle1.ycor() > 290:
