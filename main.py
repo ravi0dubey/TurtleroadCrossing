@@ -10,14 +10,13 @@ screen.setup(width=800,height=600)
 screen.bgcolor("white")
 screen.title("Turtle Road Cross")
 screen.tracer(0)
-score = Scoreboard()
+
 screen.listen()
 car = Mycar()
 turtle1 = Myturtle((0,-250))
-
-# level = int(input("Select Difficulty level, 1: Beginner, 2:Intemediate, 3: Adavance:  "))
-# pace = level * 2
-pace = 1
+level = int(input("Select Difficulty level, 1: Beginner, 2:Intemediate, 3: Adavance:  "))
+pace = level * 2
+score = Scoreboard(level)
 screen.onkey(turtle1.up,"Up")
 screen.onkey(turtle1.down,"Down")
 screen.onkey(turtle1.left,"Left")
