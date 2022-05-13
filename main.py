@@ -1,7 +1,8 @@
 from turtle import Screen
 from myturtle import Myturtle
+from Scoreboard import Scoreboard
 from cars import Mycar
-car_position = [(280,280),(280,240),(280,200),(280,160),(280,120),(280,80),(280,40),(280,-280),(280,-240),(280,-200),(280,-160),(280,-120),(280,-80),(280,-40),(280,0)]
+
 import random
 import time
 screen = Screen()
@@ -9,7 +10,7 @@ screen.setup(width=800,height=600)
 screen.bgcolor("white")
 screen.title("Turtle Road Cross")
 screen.tracer(0)
-
+score = Scoreboard()
 screen.listen()
 car = Mycar()
 turtle1 = Myturtle((0,-250))
@@ -18,26 +19,28 @@ turtle1 = Myturtle((0,-250))
 # pace = level * 2
 pace = 1
 screen.onkey(turtle1.up,"Up")
-
+screen.onkey(turtle1.down,"Down")
+screen.onkey(turtle1.left,"Left")
+screen.onkey(turtle1.right,"Right")
 game_continues = True
 while game_continues:
     screen.update()
     time.sleep(0.01)
     car.create_car()
     car.car_move(pace)
-
-    if car.distance(turtle1) < 20:
-        car.collision_detect()
-        game_continues = False
-
-    # Detect collision with wall.
-    if car.xcor() < -380:
-        print("car hit -380")
-        car.car_reset()
+    # if car.collision_detect(turtle1):
+        # game_continues = False
+    for cars in car.all_cars:
+        if cars.distance(turtle1)< 20:
+            print("Game Over")
+            game_continues = False
 
     if turtle1.ycor() > 290:
         print("You win")
-        game_continues = False
+        pace += 1
+        turtle1.reset((0,-250))
+        score.add_points()
+
 screen.exitonclick()
 
 

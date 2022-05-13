@@ -14,9 +14,8 @@ class Mycar(Turtle):
     def __init__(self):
         super().__init__()
         self.all_cars = []
-        turtle.ht()
-         # for position in car_position:
-        #     self.create_car(position)
+        self.ht()
+
 
     def create_car(self):
         random_chance = random.randint(1,20)
@@ -34,8 +33,11 @@ class Mycar(Turtle):
             new_x = car.xcor() - pace
             car.goto(new_x,car.ycor())
 
-    def collision_detect(self):
-        print("Game Over")
+    def collision_detect(self, turtle1):
+        for car in self.all_cars:
+            if car.distance(turtle1) < 20:
+                print("Game Over")
+                return True
 
     # def car_reset(self):
     #     self.goto(300,0)
